@@ -1,164 +1,188 @@
-displayNotes();
-var addBtn = document.getElementById('addBtn');
+body {
+  margin: 0;
+  background-color: white;
+  text-align: center;
+  color: mediumorchid;
+  font-family: 'Roboto', sans-serif;
+}
 
-// below event listener will add user input into the local storage
-addBtn.addEventListener('click',function(){
-	
-	let notesObj;
-	let addNote = document.getElementById('addNote');
-	let notesString = localStorage.getItem('notes');
-	
-	if(notesString == null){
-		notesObj = [];
-	}
-	else{
-		notesObj = JSON.parse(notesString);
-	}
-	
-	//Add date
-	let now = new Date();
-	let dateTime = `${now.getDate()}-${now.getMonth()+1}-${now.getFullYear()} | ${now.getHours()}:${now.getMinutes()}`;
-	
-	
-	//pushing into local storage
-	let tempObj = { text: addNote.value, time: dateTime };
-	
-	notesObj.push(tempObj);
-	localStorage.setItem('notes',JSON.stringify(notesObj));
-	
-	addNote.value = '';
-	
-	displayNotes();
-});
+#wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 1980px;
+}
 
-
-// funtion to display data stored in the local storage
-function displayNotes(){
-	let notesObj;
-	let notesString = localStorage.getItem('notes');
-	
-	if(notesString == null){
-		notesObj = [];
-	}
-	else{
-		notesObj = JSON.parse(notesString);
-	}
-	
-	let html = '';
-	
-	notesObj.forEach(function(element,index){
-		html += `
-				<div class="card mx-4 my-2 bg-dark text-white thatsMyNote" style="width: 18rem;">
-					<div class="card-body">
-						<h6>${element.time}</h6>
-						<p class="card-text">${element.text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-						<button id="${index}" onclick=deleteNote(this.id) class="btn btn-danger">Delete</button>
-					</div>
-				</div>
-			`;
-	});
-	
-	let noteEle = document.getElementById('notes');
-	
-	if(notesObj.length != 0){
-		noteEle.innerHTML = html;
-	}
-	else{
-		noteEle.innerHTML = '<h3 style="text-align: center; color: transparent;">Nothing to display</h3>';
-	}
-	
+.navcontainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 
-//function to delete a note
-function deleteNote(index){
-	let notesObj;
-	let notesString = localStorage.getItem('notes');
-	
-	if(notesString == null){
-		notesObj = [];
-	}
-	else{
-		notesObj = JSON.parse(notesString);
-	}
-	
-	notesObj.splice(index,1);
-	localStorage.setItem('notes',JSON.stringify(notesObj));
-	
-	displayNotes();
+.navbar {
+  background-color: #FFF2FF;
+  max-width: 800px;
+  padding: 20px;
+  height: 100%;
+}
+
+.navbar a{
+  padding: 20px 30px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: rgb(43, 163, 43);
+}
+
+.navbar a.active {
+  color: rgb(160, 102, 148);
+}
+
+.navbar a:hover {
+  //color: #B5449C;
+  transition-duration: 0.4s;
+  background-color: #E9D8F6;
+}
+
+.title {
+  font-size: 100px;
+  text-align: left;
+  margin: 0;
+}
+
+h1{
+  font-size: 80px;
+  font-family: 'Roboto', sans-serif;
+  background: -webkit-linear-gradient(180deg, #253476 5.73%, gold 32.29%, #a06694 78.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: left;
+}
+
+.journal {
+  background: -webkit-linear-gradient(180deg, #253476 5.73%, rgb(43, 163, 43) 32.29%, #a06694 78.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+h2 {
+  padding-left: 1vw;
+  text-align: center;
+  color: #253476;
+  font-size: 1rem;
+}
+
+h3 {
+  text-align: left;
+  padding-left: 2em;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5em;
+  letter-spacing: 0.03em;
+  color: #4BB8DB;
+}
+
+h4 {
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+  background: -webkit-linear-gradient(180deg, #253476 5.73%, rgb(43, 163, 43) 32.29%, #B5449C 78.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.container1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: left;
+}
+
+.left {
+  //background-color: green;
+  padding-left: 5em;
+  text-align: left;
+}
+
+.flex {
+  flex: 1;
+  //border: 3px solid red;
+}
+
+.flexnav {
+  flex: 1;
+  width: 100%;
+}
+
+.image {
+  //background-color: red;
+}
+
+.desc {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 150%;
+
+  /* or 150% */
+
+  color:#9B5CBD;
+}
+
+.solid {
+  border: 4px solid #FFF2FF;
+  margin: 0;
+}
+
+.flexbutton {
+  display: flex; 
+  justify-content: center;
+}
+
+.flex2 {
+  flex: 1;
+}
+
+.buttons {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  text-decoration: none;
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  background: -webkit-linear-gradient(180deg, #253476 5.73%, rgb(43, 163, 43) 32.29%, #B5449C 78.65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 2px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(180deg, #253476 0%, rgb(43, 163, 43) 39.06%, #AE33B9 100%);
+  padding: 15px 0px;
+  transition-duration: 0.4s;
+  margin-right: 20px;
+
+
+}
+
+.buttons:hover {
+  box-shadow: 0px 2px 8px 0px #4BB8DB;
 }
 
 
-
-let search = document.getElementById('search');
-search.addEventListener('input',function(e){
-	
-	let inputText = search.value;
-	
-	//below statement will be executed when the search bar is emptied using backspace
-	if(inputText == ''){
-		document.getElementById('noMatches').innerHTML = '';
-	}
-	
-	var countNone = 0;
-	
-	let cards = document.getElementsByClassName('thatsMyNote');
-	
-	
-	Array.from(cards).forEach(function(ele){
-		let cardText = ele.getElementsByTagName('p')[0].innerText;
-		if(cardText.includes(inputText)){
-			ele.style.display = 'block';
-		}
-		else{
-			ele.style.display = 'none';
-			
-			countNone++;
-			
-			if(countNone === cards.length){
-				document.getElementById('noMatches').innerHTML = '<h3 style="text-align: center; color: grey;">No matches found</h3>';
-			}
-			else{
-				document.getElementById('noMatches').innerHTML = '';
-			}
-		}
-	});
-	
-	//Below code will be executed when the input text matches all the elements.
-	if(countNone === 0){
-		document.getElementById('noMatches').innerHTML = '';
-	}
-	
-});
-
-const keys = document.querySelectorAll(".key"),
-  note = document.querySelector(".nowplaying"),
-  hints = document.querySelectorAll(".hints");
-
-function playNote(e) {
-  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`),
-    key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-
-  if (!key) return;
-
-  const keyNote = key.getAttribute("data-note");
-
-  note.innerHTML = keyNote;
-  audio.currentTime = 0;
-  audio.play();
+.flex-container {
+  display:flex;
+  margin-left: 50px;
 }
-
-function removeTransition(e) {
-  if (e.propertyName !== "transform") return;
-  this.classList.remove("playing");
+.flex-child {
+  flex:1;
+  height:100vh;
 }
-
-function hintsOn(e, index) {
-  e.setAttribute("style", "transition-delay:" + index * 50 + "ms");
+.flex-child:first-child {
+  margin-right:10px;
 }
-
-hints.forEach(hintsOn);
-
-keys.forEach(key => key.addEventListener("transitionend", removeTransition));
-
-window.addEventListener("keydown", playNote);
